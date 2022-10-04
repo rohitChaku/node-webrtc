@@ -268,6 +268,10 @@ MediaStream* MediaStream::Create(
   auto env = MediaStream::constructor().Env();
   Napi::HandleScope scope(env);
 
+  if (factory == nullptr) {
+    factory = PeerConnectionFactory::GetOrCreateDefault();
+  }
+
   auto object = MediaStream::constructor().New({
     factory->Value(),
     Napi::External<rtc::scoped_refptr<webrtc::MediaStreamInterface>>::New(env, &stream)

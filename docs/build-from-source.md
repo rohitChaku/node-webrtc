@@ -1,5 +1,26 @@
 # Build from Source
 
+## Summary
+
+Setup in a `ubuntu:focal` container with the following commands.
+
+```
+# docker pull ubuntu:focal
+# docker run --rm -it ubuntu:focal bash
+apt update -y
+apt install -y build-essential flex libelf-dev binutils-dev libdwarf-dev git cmake curl vim wget screen python2
+curl -sL https://deb.nodesource.com/setup_12.x -o /tmp/nodesource_setup.sh
+apt install nodejs -y
+apt install npm -y
+git clone https://github.com/rohitChaku/node-webrtc.git
+cd node-webrtc/
+# apt install gcc-multilib
+ln -s /usr/bin/python2 /usr/bin/python
+SKIP_DOWNLOAD=true npm install
+./node_modules/.bin/ncmake configure
+./node_modules/.bin/ncmake build
+```
+
 ## Prerequisites
 
 node-webrtc uses [node-cmake](https://github.com/cjntaylor/node-cmake) to build
